@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs');
+const fs = require('fs').promises; // Use promises for async file operations
 const path = require('path');
 const QRCode = require('qrcode');
 const basicAuth = require('express-basic-auth');
+const { DateTime } = require('luxon'); // For reliable time zone handling
 const app = express();
 const port = 3000;
 
@@ -22,14 +23,11 @@ const auth = basicAuth({
 
 // Get current date (Hong Kong time, UTC+8) in YYYY-MM-DD format
 function getDateString() {
-  const date = new Date();
-  const offset = 8 * 60 * 60 * 1000; // UTC+8
-  const localDate = new Date(date.getTime() + offset);
-  return localDate.toISOString().split('T')[0]; // e.g., "2025-08-16"
+  return DateTime.now().setZone('Asia/Hong_Kong').toFormat('yyyy-MM-dd');
 }
 
 // Generate QR code at server startup
-const surveyUrl = 'http://localhost:3000/info-sheet'; // Updated to link to info-sheet
+const surveyUrl = 'http://localhost:3000/info-sheet';
 const qrCodePath = path.join(__dirname, 'public', 'images', 'qr-code.png');
 
 // Ensure images directory exists
@@ -59,11 +57,16 @@ app.get('/', (req, res) => {
 });
 
 // Download links page
-app.get('/downloads', (req, res) => {
-  const logFiles = fs.readdirSync(__dirname)
-    .filter(file => file.startsWith('log-') && file.endsWith('.txt'))
-    .map(file => file.replace('log-', '').replace('.txt', ''));
-  res.render('index', { logFiles });
+app.get('/downloads', async (req, res) => {
+  try {
+    const logFiles = (await fs.readdir(__dirname))
+      .filter(file => file.startsWith('log-') && file.endsWith('.txt'))
+      .map(file => file.replace('log-', '').replace('.txt', ''));
+    res.render('index', { logFiles });
+  } catch (err) {
+    console.error('Failed to read log files:', err);
+    res.status(500).send('Error loading downloads page');
+  }
 });
 
 // Information Sheet page
@@ -82,7 +85,7 @@ app.get('/survey', (req, res) => {
 });
 
 // Download CSV file (requires auth)
-app.get('/download/:date', auth, (req, res) => {
+app.get('/download/:date', auth, async (req, res) => {
   try {
     const date = req.params.date;
     const logFile = `log-${date}.txt`;
@@ -92,7 +95,8 @@ app.get('/download/:date', auth, (req, res) => {
       return res.status(404).send('Log file not found for the specified date');
     }
 
-    const responses = fs.readFileSync(logFilePath, 'utf8')
+    const fileContent = await fs.readFile(logFilePath, 'utf8');
+    const responses = fileContent
       .split('\n')
       .filter(line => line.trim() !== '')
       .map(line => JSON.parse(line));
@@ -105,7 +109,17 @@ app.get('/download/:date', auth, (req, res) => {
     const csvRows = [headers.join(',')];
 
     responses.forEach(response => {
-      const row = headers.map(header => `"${response[header] || ''}"`).join(',');
+      const row = headers.map(header => {
+        let value = response[header] || '';
+        if (typeof value === 'string') {
+          // Prevent CSV injection by escaping formula characters
+          if (value.match(/^[=+\-@]/)) {
+            value = `'${value}`;
+          }
+          value = `"${value.replace(/"/g, '""')}"`;
+        }
+        return value;
+      }).join(',');
       csvRows.push(row);
     });
 
@@ -119,19 +133,44 @@ app.get('/download/:date', auth, (req, res) => {
 });
 
 // Handle survey submission
-app.post('/survey', (req, res) => {
+app.post('/survey', async (req, res) => {
   try {
+    // Required fields from survey.ejs
+    const requiredFields = [
+      'age', 'gender', 'studies', 'status', 'familyCancer', 'friendsVaccine', 'residential',
+      'hpvVirus', 'hpvNoSymptoms', 'hpvCancer', 'hpvAge', 'hpvPrevention',
+      'hpvBlood', 'hpvRespiratory', 'hpvSexual', 'hpvWomenOnly', 'hpvCure', 'hpvVaccineExists', 'hpvTest',
+      'hpvLongTerm', 'hpvGovPromotion', 'hpvAdvertising', 'hpvTreatInfection', 'hpvCompulsory',
+      'reasonWorkplace', 'reasonIncentives', 'reasonMedical', 'reasonFamilyFriends', 'reasonProtect',
+      'reasonLowRisk', 'reasonAge', 'reasonSideEffects', 'reasonNotCompulsory', 'reasonCost', 'reasonNoKnowledge', 'reasonFamilyOpposition', 'reasonSafety',
+      'fluVaccine', 'covidVaccine', 'hepatitisVaccine',
+      'hpvSideEffects', 'hpvLessProtective', 'hpvExpensive', 'hpvLessDangerous', 'hpvLackInfo'
+    ];
+
+    // Check for missing required fields
+    const missingFields = requiredFields.filter(field => !req.body[field]);
+    if (missingFields.length > 0) {
+      return res.status(400).send(`Missing required fields: ${missingFields.join(', ')}`);
+    }
+
+    // Sanitize input to prevent CSV injection
     const response = {
       timestamp: new Date().toISOString(),
       ...req.body
     };
+
+    Object.keys(response).forEach(key => {
+      if (typeof response[key] === 'string') {
+        response[key] = response[key].replace(/"/g, '""').replace(/,/g, '\\,');
+      }
+    });
 
     const dateString = getDateString();
     const logFileName = `log-${dateString}.txt`;
     const logFilePath = path.join(__dirname, logFileName);
     const responseString = JSON.stringify(response) + '\n';
 
-    fs.appendFileSync(logFilePath, responseString, 'utf8');
+    await fs.appendFile(logFilePath, responseString, 'utf8');
     console.log(`Survey response saved to ${logFileName}:`, response);
     res.redirect('/thank-you');
   } catch (err) {
@@ -143,6 +182,12 @@ app.post('/survey', (req, res) => {
 // Thank-you page
 app.get('/thank-you', (req, res) => {
   res.render('thank-you');
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Server error:', err);
+  res.status(500).send('Something went wrong. Please try again later.');
 });
 
 // Start server
