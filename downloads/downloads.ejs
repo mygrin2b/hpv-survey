@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Survey Data - HPV Vaccine Survey</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Download HPV Vaccine Survey Data</h1>
+    <p>This page provides access to survey response data. Downloads are password-protected for security.</p>
+    <h2>Download Survey Data</h2>
+    <% if (logFiles && logFiles.length > 0) { %>
+      <p>Below are the daily survey response data (CSV format, password required):</p>
+      <ul class="download-list">
+        <% logFiles.forEach(file => { %>
+          <li><a href="/download/<%= file %>" class="download-btn">Download Responses for <%= file %></a></li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No survey data available for download.</p>
+    <% } %>
+  </div>
+</body>
+</html>

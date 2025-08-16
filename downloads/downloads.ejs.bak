@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information Sheet - HPV Vaccine Survey</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Information Sheet</h1>
+    <p><strong>HONG KONG METROPOLITAN UNIVERSITY</strong></p>
+    <p><strong>Information for Participants</strong></p>
+    <p><strong>20-22 August 2025</strong></p>
+    <p>Dear Students,</p>
+    <p>I am Senior Lecturer Law Chun Hei, Grace from the Department of Nursing and Health Sciences at Hong Kong Metropolitan University (HKMU). I am conducting a research project on <em>Exploring HPV Vaccine Uptake: Awareness, Knowledge, Attitudes, and Influencing Factors Among Female Students in Hong Kong</em> and would like to invite students to participate in this research study.</p>
+
+    <h2>Research Study Procedures</h2>
+    <p>If you decide to participate in this study, you will fill out a survey about your knowledge and feelings about the HPV vaccine. This survey will take place at Hong Kong Metropolitan University, either during an HPV vaccination event or in another student area. It will take about 15-20 minutes to complete. Your responses will be anonymous, and you won’t be recorded in any way.</p>
+
+    <h2>Potential Risks</h2>
+    <p>The risks of participating are minimal. You might feel a bit uncomfortable answering questions about vaccines, but there are no physical risks. If you feel stressed or uneasy at any point, you can choose to stop, and support will be available to help you.</p>
+
+    <h2>Potential Benefits</h2>
+    <p>While you may not gain direct benefits from participating, your answers will help researchers understand why some students choose to get vaccinated. This could lead to better vaccination programs for others in the community.</p>
+
+    <h2>Participation Details</h2>
+    <p>Your participation in this study is entirely voluntary. This means that you can choose to withdraw from this study at any time without any penalty or negative consequences. All information that you provide will be strictly confidential and will be used only for research purposes. Only the Principal Investigator and Co-Investigator of this study can access the data for research purposes, and no participant will be identified by name in any report of the research study.</p>
+
+    <p>If you have any questions or concerns about the research study, please feel free to contact Senior Lecturer Ms. Law Chun Hei, Grace of HKMU at 39708746. If you have questions about your rights as a participant of this research study, please contact the Research Ethics Committee of HKMU at 27686251.</p>
+
+    <p>If you understand the contents described above and agree to participate in this research study, please click the button below to proceed to the survey.</p>
+
+    <p>
+      <a href="/survey" class="btn">Agree to Participate</a>
+      <a href="/downloads" class="btn btn-secondary">Disagree</a>
+    </p>
+
+    <p><a href="/downloads" class="info-link">Download Survey Data (Admin Access)</a></p>
+
+    <p>Yours sincerely,<br>Senior Lecturer Ms. Law Chun Hei, Grace<br>Department of Nursing and Health Sciences<br>Hong Kong Metropolitan University</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HPV Vaccine Survey - Form</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>HPV Vaccine Survey</h1>
+    <p>This survey has received ethical approval and is anonymous. Your responses will help us understand HPV vaccine uptake among Hong Kong students.</p>
+    <form action="/survey" method="POST">
+      <!-- Section 1: Socio-Demographic Information -->
+      <h2>Section 1: Socio-Demographic Information</h2>
+      <div class="section">
+        <label>Phone Number (Hong Kong, 8 digits):</label><br>
+        <input type="tel" name="phoneNumber" pattern="[2356789][0-9]{7}" required placeholder="e.g., 91234567">
+        <p class="note">Enter your 8-digit Hong Kong mobile number (starting with 2, 3, 5, 6, 7, 8, or 9).</p>
+      </div>
+      <div class="section">
+        <label>Assigned 8-Digit ID:</label><br>
+        <input type="text" name="assignedId" pattern="[0-9]{8}" required placeholder="e.g., 12345678">
+        <p class="note">Enter the 8-digit ID assigned to you for this survey.</p>
+      </div>
+      <div class="section">
+        <label>A. Age:</label><br>
+        <input type="radio" name="age" value="18" required> 18
+        <input type="radio" name="age" value="19"> 19
+        <input type="radio" name="age" value="20"> 20
+        <input type="radio" name="age" value="21"> 21
+      </div>
+      <div class="section">
+        <label>B. Gender:</label><br>
+        <input type="radio" name="gender" value="Female" required> Female
+        <input type="radio" name="gender" value="Male"> Male
+      </div>
+      <div class="section">
+        <label>C. Studies:</label><br>
+        <input type="radio" name="studies" value="HealthCare" required> Related to health care or biomedical science
+        <input type="radio" name="studies" value="Other"> Other
+      </div>
+      <div class="section">
+        <label>D. Status:</label><br>
+        <input type="radio" name="status" value="Single" required> Single
+        <input type="radio" name="status" value="InRelationship"> In a relationship
+        <input type="radio" name="status" value="Married"> Married
+      </div>
+      <div class="section">
+        <label>E. Family history of cancer:</label><br>
+        <input type="radio" name="familyCancer" value="Yes" required> Yes
+        <input type="radio" name="familyCancer" value="No"> No
+      </div>
+      <div class="section">
+        <label>F. Family or best friends who took HPV vaccine:</label><br>
+        <input type="radio" name="friendsVaccine" value="Yes" required> Yes
+        <input type="radio" name="friendsVaccine" value="No"> No
+      </div>
+      <div class="section">
+        <label>G. Residential:</label><br>
+        <input type="radio" name="residential" value="HongKong" required> Hong Kong
+        <input type="radio" name="residential" value="Kowloon"> Kowloon
+        <input type="radio" name="residential" value="NewTerritories"> New Territories
+      </div>
+
+      <!-- Section 2: Knowledge about HPV -->
+      <h2>Section 2: Knowledge about HPV</h2>
+      <div class="section">
+        <label>A. Please indicate your level of agreement:</label><br>
+        <p>a. HPV is caused by a virus</p>
+        <input type="radio" name="hpvVirus" value="1" required> Strongly disagree
+        <input type="radio" name="hpvVirus" value="2"> Disagree
+        <input type="radio" name="hpvVirus" value="3"> Neutral
+        <input type="radio" name="hpvVirus" value="4"> Agree
+        <input type="radio" name="hpvVirus" value="5"> Strongly agree
+        <!-- Repeat for other Likert-scale questions (b, c, d, e) -->
+        <p>b. Most HPV-infected individuals show no symptoms</p>
+        <input type="radio" name="hpvNoSymptoms" value="1" required> Strongly disagree
+        <input type="radio" name="hpvNoSymptoms" value="2"> Disagree
+        <input type="radio" name="hpvNoSymptoms" value="3"> Neutral
+        <input type="radio" name="hpvNoSymptoms" value="4"> Agree
+        <input type="radio" name="hpvNoSymptoms" value="5"> Strongly agree
+        <!-- Add c, d, e similarly -->
+      </div>
+      <div class="section">
+        <label>B. Please indicate if you agree or disagree:</label><br>
+        <p>a. HPV is mainly transmitted by blood</p>
+        <input type="radio" name="hpvBlood" value="Yes" required> Yes
+        <input type="radio" name="hpvBlood" value="No"> No
+        <!-- Repeat for b, c, d, e, f, g -->
+      </div>
+
+      <!-- Section 3: Attitude towards HPV vaccination -->
+      <h2>Section 3: Attitude towards HPV Vaccination</h2>
+      <div class="section">
+        <label>A. In your opinion, HPV vaccination:</label><br>
+        <p>Provides long-term protection (over 10 years)</p>
+        <input type="radio" name="hpvLongTerm" value="1" required> Strongly disagree
+        <input type="radio" name="hpvLongTerm" value="2"> Disagree
+        <input type="radio" name="hpvLongTerm" value="3"> Neutral
+        <input type="radio" name="hpvLongTerm" value="4"> Agree
+        <input type="radio" name="hpvLongTerm" value="5"> Strongly agree
+        <!-- Repeat for other questions in Section 3A -->
+      </div>
+      <div class="section">
+        <label>B. Reasons for deciding to take the HPV vaccine:</label><br>
+        <p>To protect myself against HPV and complications like cancer</p>
+        <input type="radio" name="reasonProtect" value="1" required> Strongly disagree
+        <input type="radio" name="reasonProtect" value="2"> Disagree
+        <input type="radio" name="reasonProtect" value="3"> Neutral
+        <input type="radio" name="reasonProtect" value="4"> Agree
+        <input type="radio" name="reasonProtect" value="5"> Strongly agree
+        <!-- Repeat for other reasons -->
+      </div>
+      <div class="section">
+        <label>C. Reasons for not receiving the HPV vaccine before:</label><br>
+        <p>Lack of knowledge about HPV and the vaccination program</p>
+        <input type="radio" name="reasonNoKnowledge" value="1" required> Strongly disagree
+        <input type="radio" name="reasonNoKnowledge" value="2"> Disagree
+        <input type="radio" name="reasonNoKnowledge" value="3"> Neutral
+        <input type="radio" name="reasonNoKnowledge" value="4"> Agree
+        <input type="radio" name="reasonNoKnowledge" value="5"> Strongly agree
+        <!-- Repeat for other reasons -->
+      </div>
+
+      <!-- Section 4: Comparison to other vaccines -->
+      <h2>Section 4: Comparison to Other Vaccines</h2>
+      <div class="section">
+        <label>A. Have you received the following vaccines?</label><br>
+        <p>Flu vaccine:</p>
+        <input type="radio" name="fluVaccine" value="Yes" required> Yes
+        <input type="radio" name="fluVaccine" value="No"> No
+        <p>COVID vaccine:</p>
+        <input type="radio" name="covidVaccine" value="Yes" required> Yes
+        <input type="radio" name="covidVaccine" value="No"> No
+        <p>Hepatitis vaccine:</p>
+        <input type="radio" name="hepatitisVaccine" value="Yes" required> Yes
+        <input type="radio" name="hepatitisVaccine" value="No"> No
+      </div>
+      <div class="section">
+        <label>B. In your opinion:</label><br>
+        <p>a. The HPV vaccine may lead to more side effects than other vaccines</p>
+        <input type="radio" name="hpvSideEffects" value="1" required> Strongly disagree
+        <input type="radio" name="hpvSideEffects" value="2"> Disagree
+        <input type="radio" name="hpvSideEffects" value="3"> Neutral
+        <input type="radio" name="hpvSideEffects" value="4"> Agree
+        <input type="radio" name="hpvSideEffects" value="5"> Strongly agree
+        <!-- Repeat for b, c, d, e -->
+      </div>
+
+      <button type="submit" class="btn">Submit Survey</button>
+    </form>
+  </div>
+</body>
+</html>
