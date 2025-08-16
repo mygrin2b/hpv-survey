@@ -71,8 +71,10 @@ app.get('/info-sheet', (req, res) => {
   res.render('info-sheet');
 });
 
-// 放在 /survey 路由之前即可
-app.get('/goodbye', (req, res) => res.render('goodbye'));
+// Goodbye page
+app.get('/goodbye', (req, res) => {
+  res.render('goodbye');
+});
 
 // Survey page
 app.get('/survey', (req, res) => {
@@ -99,7 +101,7 @@ app.get('/download/:date', auth, (req, res) => {
       return res.status(404).send('Log file for the specified date is empty');
     }
 
-    const headers = ['timestamp', 'phoneNumber', 'assignedId', ...Object.keys(responses[0]).filter(key => key !== 'timestamp' && key !== 'phoneNumber' && key !== 'assignedId')];
+    const headers = ['timestamp', ...Object.keys(responses[0]).filter(key => key !== 'timestamp')];
     const csvRows = [headers.join(',')];
 
     responses.forEach(response => {
@@ -119,18 +121,8 @@ app.get('/download/:date', auth, (req, res) => {
 // Handle survey submission
 app.post('/survey', (req, res) => {
   try {
-    const { phoneNumber, assignedId } = req.body;
-    if (!/^[2356789][0-9]{7}$/.test(phoneNumber)) {
-      return res.status(400).send('Invalid phone number format');
-    }
-    if (!/^[0-9]{8}$/.test(assignedId)) {
-      return res.status(400).send('ID must be an 8-digit number');
-    }
-
     const response = {
       timestamp: new Date().toISOString(),
-      phoneNumber,
-      assignedId,
       ...req.body
     };
 
