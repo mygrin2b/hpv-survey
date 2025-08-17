@@ -5,8 +5,9 @@ const path = require('path');
 const QRCode = require('qrcode');
 const basicAuth = require('express-basic-auth');
 const { DateTime } = require('luxon'); // For reliable time zone handling
+const simpleGit = require('simple-git'); // For Git operations
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Use PORT env for Render compatibility
 
 // Middleware
 app.set('view engine', 'ejs');
@@ -26,8 +27,46 @@ function getDateString() {
   return DateTime.now().setZone('Asia/Hong_Kong').toFormat('yyyy-MM-dd');
 }
 
+// Initialize Git
+const git = simpleGit();
+const githubConfig = {
+  repoUrl: process.env.GITHUB_REPO_URL, // e.g., https://github.com/your-username/your-repo.git
+  username: process.env.GITHUB_USERNAME,
+  email: process.env.GITHUB_EMAIL,
+  token: process.env.GITHUB_TOKEN
+};
+
+// Configure Git with user credentials
+async function configureGit() {
+  try {
+    await git.addConfig('user.name', githubConfig.username);
+    await git.addConfig('user.email', githubConfig.email);
+    // Add token to repo URL for authentication
+    const authRepoUrl = githubConfig.repoUrl.replace('https://', `https://${githubConfig.token}@`);
+    await git.addRemote('origin', authRepoUrl, { '--force': null });
+    console.log('Git configured successfully');
+  } catch (err) {
+    console.error('Failed to configure Git:', err);
+  }
+}
+
+// Push logs to GitHub
+async function pushToGitHub(logFileName) {
+  try {
+    await git.add(`./${logFileName}`);
+    await git.commit(`Update survey log: ${logFileName}`);
+    await git.push('origin', 'main', { '--force': null }); // Adjust branch name if not 'main'
+    console.log(`Successfully pushed ${logFileName} to GitHub`);
+  } catch (err) {
+    console.error('Failed to push to GitHub:', err);
+  }
+}
+
+// Initialize Git at startup
+configureGit();
+
 // Generate QR code at server startup
-const surveyUrl = 'http://localhost:3000/info-sheet';
+const surveyUrl = process.env.SURVEY_URL || 'http://localhost:3000/info-sheet'; // Use env for Render
 const qrCodePath = path.join(__dirname, 'public', 'images', 'qr-code.png');
 
 // Ensure images directory exists
@@ -172,6 +211,10 @@ app.post('/survey', async (req, res) => {
 
     await fs.appendFile(logFilePath, responseString, 'utf8');
     console.log(`Survey response saved to ${logFileName}:`, response);
+
+    // Push to GitHub after saving log
+    await pushToGitHub(logFileName);
+
     res.redirect('/thank-you');
   } catch (err) {
     console.error('Failed to save survey response:', err);
