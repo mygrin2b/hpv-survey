@@ -31,19 +31,35 @@ function getDateString() {
   return DateTime.now().setZone('Asia/Hong_Kong').toFormat('yyyy-MM-dd');
 }
 
-// Upload log file to GitHub via API
+// Upload log file to GitHub via API with SHA support
 async function uploadToGitHub(logFileName, logFilePath) {
   try {
     if (!process.env.GITHUB_TOKEN) {
       throw new Error('Missing GITHUB_TOKEN environment variable');
     }
     const fileContent = await fsPromises.readFile(logFilePath, 'utf8');
+    let sha = null;
+
+    // Check if file exists to get SHA
+    try {
+      const response = await octokit.repos.getContent({
+        owner: 'mygrin2b', // Replace with your GitHub username
+        repo: 'hpv-survey', // Replace with your repository name
+        path: logFileName,
+        ref: 'main'
+      });
+      sha = response.data.sha;
+    } catch (err) {
+      if (err.status !== 404) throw err; // Ignore 404 (file not found), proceed to create
+    }
+
     await octokit.repos.createOrUpdateFileContents({
       owner: 'mygrin2b', // Replace with your GitHub username
       repo: 'hpv-survey', // Replace with your repository name
       path: logFileName,
       message: `Add ${logFileName}`,
       content: Buffer.from(fileContent).toString('base64'),
+      sha: sha, // Only provided if file exists
       branch: 'main'
     });
     console.log(`Successfully uploaded ${logFileName} to GitHub`);
