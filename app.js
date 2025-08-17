@@ -53,12 +53,15 @@ async function configureGit() {
 // Push logs to GitHub
 async function pushToGitHub(logFileName) {
   try {
+    console.log(`Attempting to push ${logFileName} to GitHub`);
     await git.add(`./${logFileName}`);
+    console.log(`Added ${logFileName} to Git`);
     await git.commit(`Update survey log: ${logFileName}`);
-    await git.push('origin', 'main', { '--force': null }); // Adjust branch name if not 'main'
+    console.log(`Committed ${logFileName}`);
+    await git.push('origin', 'main', { '--force': null });
     console.log(`Successfully pushed ${logFileName} to GitHub`);
   } catch (err) {
-    console.error('Failed to push to GitHub:', err);
+    console.error('Failed to push to GitHub:', err.message);
   }
 }
 
