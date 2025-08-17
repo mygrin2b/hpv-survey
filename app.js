@@ -6,9 +6,12 @@ const path = require('path');
 const QRCode = require('qrcode');
 const basicAuth = require('express-basic-auth');
 const { DateTime } = require('luxon'); // For reliable time zone handling
-const simpleGit = require('simple-git'); // For Git operations
+const { Octokit } = require('@octokit/rest'); // For GitHub API
 const app = express();
 const port = process.env.PORT || 3000; // Use PORT env for Render compatibility
+
+// Initialize Octokit with GitHub token
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
 // Middleware
 app.set('view engine', 'ejs');
@@ -28,49 +31,26 @@ function getDateString() {
   return DateTime.now().setZone('Asia/Hong_Kong').toFormat('yyyy-MM-dd');
 }
 
-// Initialize Git
-const git = simpleGit();
-const githubConfig = {
-  repoUrl: process.env.GITHUB_REPO_URL, // e.g., https://github.com/mygrin2b/hpv-survey.git
-  username: process.env.GITHUB_USERNAME,
-  email: process.env.GITHUB_EMAIL,
-  token: process.env.GITHUB_TOKEN
-};
-
-// Configure Git with user credentials
-async function configureGit() {
+// Upload log file to GitHub via API
+async function uploadToGitHub(logFileName, logFilePath) {
   try {
-    if (!githubConfig.username || !githubConfig.email || !githubConfig.repoUrl || !githubConfig.token) {
-      throw new Error('Missing GitHub configuration: check GITHUB_USERNAME, GITHUB_EMAIL, GITHUB_REPO_URL, or GITHUB_TOKEN');
+    if (!process.env.GITHUB_TOKEN) {
+      throw new Error('Missing GITHUB_TOKEN environment variable');
     }
-    await git.addConfig('user.name', githubConfig.username);
-    await git.addConfig('user.email', githubConfig.email);
-    // Add token to repo URL for authentication
-    const authRepoUrl = githubConfig.repoUrl.replace('https://', `https://${githubConfig.token}@`);
-    await git.addRemote('origin', authRepoUrl);
-    console.log('Git configured successfully');
+    const fileContent = await fsPromises.readFile(logFilePath, 'utf8');
+    await octokit.repos.createOrUpdateFileContents({
+      owner: 'mygrin2b', // Replace with your GitHub username
+      repo: 'hpv-survey', // Replace with your repository name
+      path: logFileName,
+      message: `Add ${logFileName}`,
+      content: Buffer.from(fileContent).toString('base64'),
+      branch: 'main'
+    });
+    console.log(`Successfully uploaded ${logFileName} to GitHub`);
   } catch (err) {
-    console.error('Failed to configure Git:', err.message);
+    console.error('Failed to upload to GitHub:', err.message);
   }
 }
-
-// Push logs to GitHub
-async function pushToGitHub(logFileName) {
-  try {
-    console.log(`Attempting to push ${logFileName} to GitHub`);
-    await git.add(`./${logFileName}`);
-    console.log(`Added ${logFileName} to Git`);
-    await git.commit(`Update survey log: ${logFileName}`);
-    console.log(`Committed ${logFileName}`);
-    await git.push('origin', 'main');
-    console.log(`Successfully pushed ${logFileName} to GitHub`);
-  } catch (err) {
-    console.error('Failed to push to GitHub:', err.message);
-  }
-}
-
-// Initialize Git at startup
-configureGit();
 
 // Generate QR code at server startup
 const surveyUrl = process.env.SURVEY_URL || 'http://localhost:3000/info-sheet'; // Use env for Render
@@ -219,8 +199,8 @@ app.post('/survey', async (req, res) => {
     await fsPromises.appendFile(logFilePath, responseString, 'utf8');
     console.log(`Survey response saved to ${logFileName}:`, response);
 
-    // Push to GitHub after saving log
-    await pushToGitHub(logFileName);
+    // Upload to GitHub via API
+    await uploadToGitHub(logFileName, logFilePath);
 
     res.redirect('/thank-you');
   } catch (err) {
