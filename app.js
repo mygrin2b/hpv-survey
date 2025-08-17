@@ -31,7 +31,7 @@ function getDateString() {
 // Initialize Git
 const git = simpleGit();
 const githubConfig = {
-  repoUrl: process.env.GITHUB_REPO_URL, // e.g., https://github.com/your-username/your-repo.git
+  repoUrl: process.env.GITHUB_REPO_URL, // e.g., https://github.com/mygrin2b/hpv-survey.git
   username: process.env.GITHUB_USERNAME,
   email: process.env.GITHUB_EMAIL,
   token: process.env.GITHUB_TOKEN
@@ -40,6 +40,9 @@ const githubConfig = {
 // Configure Git with user credentials
 async function configureGit() {
   try {
+    if (!githubConfig.username || !githubConfig.email || !githubConfig.repoUrl || !githubConfig.token) {
+      throw new Error('Missing GitHub configuration: check GITHUB_USERNAME, GITHUB_EMAIL, GITHUB_REPO_URL, or GITHUB_TOKEN');
+    }
     await git.addConfig('user.name', githubConfig.username);
     await git.addConfig('user.email', githubConfig.email);
     // Add token to repo URL for authentication
@@ -59,7 +62,7 @@ async function pushToGitHub(logFileName) {
     console.log(`Added ${logFileName} to Git`);
     await git.commit(`Update survey log: ${logFileName}`);
     console.log(`Committed ${logFileName}`);
-    await git.push('origin', 'main'); // Remove --force unless necessary
+    await git.push('origin', 'main');
     console.log(`Successfully pushed ${logFileName} to GitHub`);
   } catch (err) {
     console.error('Failed to push to GitHub:', err.message);
