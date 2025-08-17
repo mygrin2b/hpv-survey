@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs').promises; // Use promises for async file operations
+const fs = require('fs'); // Default fs for synchronous methods like existsSync
+const fsPromises = require('fs').promises; // Promises for async file operations
 const path = require('path');
 const QRCode = require('qrcode');
 const basicAuth = require('express-basic-auth');
@@ -43,10 +44,10 @@ async function configureGit() {
     await git.addConfig('user.email', githubConfig.email);
     // Add token to repo URL for authentication
     const authRepoUrl = githubConfig.repoUrl.replace('https://', `https://${githubConfig.token}@`);
-    await git.addRemote('origin', authRepoUrl, { '--force': null });
+    await git.addRemote('origin', authRepoUrl);
     console.log('Git configured successfully');
   } catch (err) {
-    console.error('Failed to configure Git:', err);
+    console.error('Failed to configure Git:', err.message);
   }
 }
 
@@ -58,7 +59,7 @@ async function pushToGitHub(logFileName) {
     console.log(`Added ${logFileName} to Git`);
     await git.commit(`Update survey log: ${logFileName}`);
     console.log(`Committed ${logFileName}`);
-    await git.push('origin', 'main', { '--force': null });
+    await git.push('origin', 'main'); // Remove --force unless necessary
     console.log(`Successfully pushed ${logFileName} to GitHub`);
   } catch (err) {
     console.error('Failed to push to GitHub:', err.message);
@@ -101,7 +102,7 @@ app.get('/', (req, res) => {
 // Download links page
 app.get('/downloads', async (req, res) => {
   try {
-    const logFiles = (await fs.readdir(__dirname))
+    const logFiles = (await fsPromises.readdir(__dirname))
       .filter(file => file.startsWith('log-') && file.endsWith('.txt'))
       .map(file => file.replace('log-', '').replace('.txt', ''));
     res.render('index', { logFiles });
@@ -137,7 +138,7 @@ app.get('/download/:date', auth, async (req, res) => {
       return res.status(404).send('Log file not found for the specified date');
     }
 
-    const fileContent = await fs.readFile(logFilePath, 'utf8');
+    const fileContent = await fsPromises.readFile(logFilePath, 'utf8');
     const responses = fileContent
       .split('\n')
       .filter(line => line.trim() !== '')
@@ -212,7 +213,7 @@ app.post('/survey', async (req, res) => {
     const logFilePath = path.join(__dirname, logFileName);
     const responseString = JSON.stringify(response) + '\n';
 
-    await fs.appendFile(logFilePath, responseString, 'utf8');
+    await fsPromises.appendFile(logFilePath, responseString, 'utf8');
     console.log(`Survey response saved to ${logFileName}:`, response);
 
     // Push to GitHub after saving log
