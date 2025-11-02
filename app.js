@@ -44,7 +44,7 @@ async function uploadToGitHub(logFileName, logFilePath) {
     try {
       const response = await octokit.repos.getContent({
         owner: 'mygrin2b', // Replace with your GitHub username
-        repo: 'flu-covid-survey', // Replace with your repository name
+        repo: 'hpv-survey', // Replace with your repository name
         path: logFileName,
         ref: 'main'
       });
@@ -55,7 +55,7 @@ async function uploadToGitHub(logFileName, logFilePath) {
 
     await octokit.repos.createOrUpdateFileContents({
       owner: 'mygrin2b', // Replace with your GitHub username
-      repo: 'flu-covid-survey', // Replace with your repository name
+      repo: 'hpv-survey', // Replace with your repository name
       path: logFileName,
       message: `Add ${logFileName}`,
       content: Buffer.from(fileContent).toString('base64'),
