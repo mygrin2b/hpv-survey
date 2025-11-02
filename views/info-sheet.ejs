@@ -3,53 +3,283 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Information Sheet - HPV Vaccine Survey</title>
+  <title>Combined Respiratory Vaccine Survey - Form</title>
   <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* 圆形checkbox样式 */
+    input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #999;
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    
+    input[type="checkbox"]:checked {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    
+    input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      background-color: white;
+      border-radius: 50%;
+    }
+    
+    input[type="checkbox"]:hover {
+      border-color: #007bff;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Information Sheet</h1>
-    <p><strong>HONG KONG METROPOLITAN UNIVERSITY</strong></p>
-    <p><strong>Information for Participants</strong></p>
-    <p><strong>20-22 August 2025</strong></p>
-    <p>Dear Students,</p>
-    <p>I am Senior Lecturer Law Chun Hei, Grace from the Department of Nursing and Health Sciences at Hong Kong Metropolitan University (HKMU). I am conducting a research project on <em>Exploring HPV Vaccine Uptake: Awareness, Knowledge, Attitudes, and Influencing Factors Among Female Students in Hong Kong</em> and would like to invite students to participate in this research study.</p>
+    <h1>Acceptability of a Combined Respiratory Influenza-COVID-19 Vaccine Among Nursing Students in Hong Kong</h1>
+    <p>Thank you for participating in this research study. As a nursing student, your insights are valuable for understanding attitudes toward emerging vaccines that could protect both healthcare workers and patients from multiple respiratory viruses. This survey is anonymous, takes about 10-15 minutes, and your responses will help inform public health strategies. Participation is voluntary, and you may withdraw at any time. No personally identifying information will be collected. By proceeding, you consent to participate. If you have questions, contact the Principal Investigator Prof. Eddy Lam at 3970 2992.</p>
+    <p>This study has been approved by the Research Ethics Committee (REC) of The Hong Kong Metropolitan University. REC Reference No.: HE-SF2025/64. If you have questions about your rights as a participant in this research study, please contact the Research Ethics Committee of HKMU at 27686251.</p>
+    <form action="/survey" method="POST">
+      <!-- Section 1: Demographics -->
+      <h2>Section 1: Demographics</h2>
+      <p>Please provide the following information about yourself.</p>
+      <div class="section">
+        <label>What is your age?</label><br>
+        <input type="text" name="age" placeholder="e.g., 18-20, 21-23" required>
+      </div>
+      <div class="section">
+        <label>What is your sex?</label><br>
+        <input type="radio" name="sex" value="Male" required> Male
+        <input type="radio" name="sex" value="Female"> Female
+      </div>
+      <div class="section">
+        <label>Which nursing education program are you currently enrolled in?</label><br>
+        <input type="radio" name="program" value="HighDiploma" required> High Diploma in Nursing<br>
+        <input type="radio" name="program" value="Bachelor"> Bachelor of Nursing<br>
+        <input type="radio" name="program" value="Postgraduate"> Postgraduate programmes (Nursing)<br>
+        <input type="radio" name="program" value="Doctorate"> Doctorate (DCS, PhD)
+      </div>
 
-    <h2>Research Study Procedures</h2>
-    <p>If you decide to participate in this study, you will fill out a survey about your knowledge and feelings about the HPV vaccine. This survey will take place at Hong Kong Metropolitan University, either during an HPV vaccination event or in another student area. It will take about 15-20 minutes to complete. Your responses will be anonymous, and you won’t be recorded in any way.</p>
+      <!-- Section 2: Vaccination History -->
+      <h2>Section 2: Vaccination History</h2>
+      <p>Please indicate your vaccination status.</p>
+      <div class="section">
+        <label>Have you received the seasonal influenza vaccine in the past 12 months?</label><br>
+        <input type="radio" name="fluVaccine12m" value="Yes" required> Yes
+        <input type="radio" name="fluVaccine12m" value="No"> No
+      </div>
+      <div class="section">
+        <label>Have you received any Covid-19 vaccine dose (primary series or booster) in the past 12 months?</label><br>
+        <input type="radio" name="covidVaccine12m" value="Yes" required> Yes
+        <input type="radio" name="covidVaccine12m" value="No"> No
+      </div>
+      <div class="section">
+        <label>Have you ever experienced side effects from any respiratory virus vaccine (e.g., flu, Covid-19)?</label><br>
+        <input type="radio" name="sideEffects" value="VerySerious" required> Yes, very serious side effects (difficulty breathing, serious allergic reaction, high fever)<br>
+        <input type="radio" name="sideEffects" value="Moderate"> Yes, moderate side effects (persistent cough, moderate fever, swelling)<br>
+        <input type="radio" name="sideEffects" value="VeryMild"> Yes, very mild side effects (soreness or redness, mild fatigue, slight headache)<br>
+        <input type="radio" name="sideEffects" value="No"> No
+      </div>
+      <div class="section">
+        <label>Have you heard about live attenuated or inactivated (traditional) vaccines?</label><br>
+        <input type="radio" name="heardTraditional" value="Yes" required> Yes
+        <input type="radio" name="heardTraditional" value="No"> No
+      </div>
+      <div class="section">
+        <label>Have you heard about mRNA vaccines?</label><br>
+        <input type="radio" name="heardMRNA" value="Yes" required> Yes
+        <input type="radio" name="heardMRNA" value="No"> No
+      </div>
 
-    <h2>Potential Risks</h2>
-    <p>The risks of participating are minimal. You might feel a bit uncomfortable answering questions about vaccines, but there are no physical risks. If you feel stressed or uneasy at any point, you can choose to stop, and support will be available to help you.</p>
+      <!-- Section 3: Knowledge Assessment -->
+      <h2>Section 3: Knowledge Assessment</h2>
+      <p>Please answer the following 7 questions to the best of your knowledge. They include true/false and multiple-choice formats. There are no right or wrong answers—this is simply to help us gauge your baseline knowledge.</p>
+      <div class="section">
+        <label>1. Approximately what percentage of the global population is infected with influenza annually?</label><br>
+        <input type="radio" name="q1" value="a" required> a) Less than 5%<br>
+        <input type="radio" name="q1" value="b"> b) 5-10%<br>
+        <input type="radio" name="q1" value="c"> c) 20-30%<br>
+        <input type="radio" name="q1" value="d"> d) More than 50%
+      </div>
+      <div class="section">
+        <label>2. True or False: Influenza is primarily transmitted through airborne droplets from coughing or sneezing.</label><br>
+        <input type="radio" name="q2" value="True" required> a) True
+        <input type="radio" name="q2" value="False"> b) False
+      </div>
+      <div class="section">
+        <label>3. How often should influenza vaccines be administered?</label><br>
+        <input type="radio" name="q3" value="a" required> a) Every year<br>
+        <input type="radio" name="q3" value="b"> b) Every five years<br>
+        <input type="radio" name="q3" value="c"> c) Once in a lifetime<br>
+        <input type="radio" name="q3" value="d"> d) I don't know
+      </div>
+      <div class="section">
+        <label>4. True or False: Covid-19 vaccines have been shown to reduce severe outcomes (hospitalization/death) by over 80% in most studies.</label><br>
+        <input type="radio" name="q4" value="True" required> a) True
+        <input type="radio" name="q4" value="False"> b) False
+      </div>
+      <div class="section">
+        <label>5. Which of the following is a common mode of Covid-19 transmission?</label><br>
+        <input type="radio" name="q5" value="a" required> a) Only through contaminated surfaces<br>
+        <input type="radio" name="q5" value="b"> b) Airborne via respiratory droplets and aerosols<br>
+        <input type="radio" name="q5" value="c"> c) Exclusively through food/water<br>
+        <input type="radio" name="q5" value="d"> d) Insect bites
+      </div>
+      <div class="section">
+        <label>6. Which of the following vaccines uses mRNA technologies?</label><br>
+        <input type="radio" name="q6" value="a" required> a) Influenza vaccine<br>
+        <input type="radio" name="q6" value="b"> b) Covid-19 vaccine Comirnaty (Pfizer/ BioNTech)<br>
+        <input type="radio" name="q6" value="c"> c) Covid-19 vaccine Sinovac<br>
+        <input type="radio" name="q6" value="d"> d) Infant BCG vaccine<br>
+        <input type="radio" name="q6" value="e"> e) Measles, Mumps, Rubella & Varicella Infant (MMRV) vaccine
+      </div>
+      <div class="section">
+        <label>7. What is the purpose of influenza or Covid-19 vaccines?</label><br>
+        <input type="radio" name="q7" value="a" required> a) To treat diseases<br>
+        <input type="radio" name="q7" value="b"> b) To prevent infection<br>
+        <input type="radio" name="q7" value="c"> c) To lower the severity of complications even if infected<br>
+        <input type="radio" name="q7" value="d"> d) Both options b and c
+      </div>
 
-    <h2>Potential Benefits</h2>
-    <p>While you may not gain direct benefits from participating, your answers will help researchers understand why some students choose to get vaccinated. This could lead to better vaccination programs for others in the community.</p>
+      <!-- Section 4: Attitudes Toward a Combined Vaccine -->
+      <h2>Section 4: Attitudes Toward a Combined Vaccine (Health Belief Model)</h2>
+      <p>The following 12 questions ask about your perceptions of a hypothetical new combined vaccine that protects against influenza and Covid-19 in a single shot.</p>
+      <p>For each statement, please rate your agreement on a scale of 1-5.</p>
+      <p><strong>1 = Strongly Disagree | 2 = Disagree | 3 = Neutral | 4 = Agree | 5 = Strongly Agree</strong></p>
+      <div class="section">
+        <p>1. I am particularly concerned about severe complications from influenza or Covid-19 viruses (e.g., hospitalization, long-term side effects).</p>
+        <input type="radio" name="attitude1" value="1" required> Strongly disagree
+        <input type="radio" name="attitude1" value="2"> Disagree
+        <input type="radio" name="attitude1" value="3"> Neutral
+        <input type="radio" name="attitude1" value="4"> Agree
+        <input type="radio" name="attitude1" value="5"> Strongly agree
 
-    <h2>Participation Details</h2>
-    <p>Your participation in this study is entirely voluntary. This means that you can choose to withdraw from this study at any time without any penalty or negative consequences. All information that you provide will be strictly confidential and will be used only for research purposes. Only the Principal Investigator and Co-Investigator of this study can access the data for research purposes, and no participant will be identified by name in any report of the research study.</p>
+        <p>2. A combined vaccine would effectively reduce my risk of getting sick from influenza and Covid-19 viruses.</p>
+        <input type="radio" name="attitude2" value="1" required> Strongly disagree
+        <input type="radio" name="attitude2" value="2"> Disagree
+        <input type="radio" name="attitude2" value="3"> Neutral
+        <input type="radio" name="attitude2" value="4"> Agree
+        <input type="radio" name="attitude2" value="5"> Strongly agree
 
-    <p>If you have any questions or concerns about the research study, please feel free to contact Senior Lecturer Ms. Law Chun Hei, Grace of HKMU at 39708746. If you have questions about your rights as a participant of this research study, please contact the Research Ethics Committee of HKMU at 27686251.</p>
+        <p>3. Getting a combined vaccine would make it easier for me to stay protected without multiple shots, benefiting my busy schedule as a student.</p>
+        <input type="radio" name="attitude3" value="1" required> Strongly disagree
+        <input type="radio" name="attitude3" value="2"> Disagree
+        <input type="radio" name="attitude3" value="3"> Neutral
+        <input type="radio" name="attitude3" value="4"> Agree
+        <input type="radio" name="attitude3" value="5"> Strongly agree
 
-    <p>If you understand the contents described above and agree to participate in this research study, please click the button below to proceed to the survey.</p>
+        <p>4. I worry about the potential side effects and safety of a new combined vaccine.</p>
+        <input type="radio" name="attitude4" value="1" required> Strongly disagree
+        <input type="radio" name="attitude4" value="2"> Disagree
+        <input type="radio" name="attitude4" value="3"> Neutral
+        <input type="radio" name="attitude4" value="4"> Agree
+        <input type="radio" name="attitude4" value="5"> Strongly agree
 
-    <p>
-      <a href="/survey" class="btn">Agree to Participate</a>
-      <a href="/goodbye" class="btn btn-secondary" id="disagree-btn">Disagree</a>
-    </p>
+        <p>5. I worry that a combined vaccine will have reduced efficacy and offer less protection.</p>
+        <input type="radio" name="attitude5" value="1" required> Strongly disagree
+        <input type="radio" name="attitude5" value="2"> Disagree
+        <input type="radio" name="attitude5" value="3"> Neutral
+        <input type="radio" name="attitude5" value="4"> Agree
+        <input type="radio" name="attitude5" value="5"> Strongly agree
 
-    <p><a href="/downloads" class="info-link">Download Survey Data (Admin Access)</a></p>
+        <p>6. The cost or access to this vaccine might prevent me from getting it.</p>
+        <input type="radio" name="attitude6" value="1" required> Strongly disagree
+        <input type="radio" name="attitude6" value="2"> Disagree
+        <input type="radio" name="attitude6" value="3"> Neutral
+        <input type="radio" name="attitude6" value="4"> Agree
+        <input type="radio" name="attitude6" value="5"> Strongly agree
 
-    <p>Yours sincerely,<br>Senior Lecturer Ms. Law Chun Hei, Grace<br>Department of Nursing and Health Sciences<br>Hong Kong Metropolitan University</p>
+        <p>7. A recommendation from my nursing instructor or healthcare provider would strongly encourage me to receive the combined vaccine.</p>
+        <input type="radio" name="attitude7" value="1" required> Strongly disagree
+        <input type="radio" name="attitude7" value="2"> Disagree
+        <input type="radio" name="attitude7" value="3"> Neutral
+        <input type="radio" name="attitude7" value="4"> Agree
+        <input type="radio" name="attitude7" value="5"> Strongly agree
+
+        <p>8. Public health campaigns or University Campus offering free combined vaccines would prompt me to act.</p>
+        <input type="radio" name="attitude8" value="1" required> Strongly disagree
+        <input type="radio" name="attitude8" value="2"> Disagree
+        <input type="radio" name="attitude8" value="3"> Neutral
+        <input type="radio" name="attitude8" value="4"> Agree
+        <input type="radio" name="attitude8" value="5"> Strongly agree
+
+        <p>9. I am more willing to receive an mRNA-based influenza vaccine than a traditional one (an inactivated or live attenuated vaccine).</p>
+        <input type="radio" name="attitude9" value="1" required> Strongly disagree
+        <input type="radio" name="attitude9" value="2"> Disagree
+        <input type="radio" name="attitude9" value="3"> Neutral
+        <input type="radio" name="attitude9" value="4"> Agree
+        <input type="radio" name="attitude9" value="5"> Strongly agree
+
+        <p>10. I have a basic understanding of how mRNA vaccines work when compared to traditional vaccines (live attenuated and inactivated vaccines).</p>
+        <input type="radio" name="attitude10" value="1" required> Strongly disagree
+        <input type="radio" name="attitude10" value="2"> Disagree
+        <input type="radio" name="attitude10" value="3"> Neutral
+        <input type="radio" name="attitude10" value="4"> Agree
+        <input type="radio" name="attitude10" value="5"> Strongly agree
+
+        <p>11. I believe that the vaccines produced using mRNA technology are safe.</p>
+        <input type="radio" name="attitude11" value="1" required> Strongly disagree
+        <input type="radio" name="attitude11" value="2"> Disagree
+        <input type="radio" name="attitude11" value="3"> Neutral
+        <input type="radio" name="attitude11" value="4"> Agree
+        <input type="radio" name="attitude11" value="5"> Strongly agree
+
+        <p>12. I believe that the vaccines produced using mRNA technology are more effective than the traditional vaccines (live attenuated or inactivated vaccines).</p>
+        <input type="radio" name="attitude12" value="1" required> Strongly disagree
+        <input type="radio" name="attitude12" value="2"> Disagree
+        <input type="radio" name="attitude12" value="3"> Neutral
+        <input type="radio" name="attitude12" value="4"> Agree
+        <input type="radio" name="attitude12" value="5"> Strongly agree
+      </div>
+
+      <!-- Section 5: Intention to Vaccinate -->
+      <h2>Section 5: Intention to Vaccinate</h2>
+      <div class="section">
+        <label>If a combined annual respiratory vaccine against both influenza and Covid-19 were available, how likely would you be to receive it?</label><br>
+        <input type="radio" name="intentionCombined" value="VeryUnlikely" required> Very unlikely
+        <input type="radio" name="intentionCombined" value="Unlikely"> Unlikely
+        <input type="radio" name="intentionCombined" value="Likely"> Likely
+        <input type="radio" name="intentionCombined" value="VeryLikely"> Very likely
+      </div>
+      <div class="section">
+        <label>How likely would you be to receive this combined vaccine if it utilized mRNA technology (like the Covid-19 Pfizer/ BioNTech vaccine)?</label><br>
+        <input type="radio" name="intentionMRNA" value="VeryUnlikely" required> Very unlikely
+        <input type="radio" name="intentionMRNA" value="Unlikely"> Unlikely
+        <input type="radio" name="intentionMRNA" value="Likely"> Likely
+        <input type="radio" name="intentionMRNA" value="VeryLikely"> Very likely
+      </div>
+      <div class="section">
+        <label>What factors would influence your decision to receive the combined vaccine? (Select all that apply)</label><br>
+        <input type="checkbox" name="factors" value="HealthcareProfessionals"> Recommendations from healthcare professionals<br>
+        <input type="checkbox" name="factors" value="Peers"> Information from peers<br>
+        <input type="checkbox" name="factors" value="PersonalBeliefs"> Personal health beliefs<br>
+        <input type="checkbox" name="factors" value="mRNATechnology"> It is a vaccine using the new mRNA technology<br>
+        <input type="checkbox" name="factors" value="SingleShot"> Do not have to take multiple vaccine shots because one vaccine can protect against multiple diseases<br>
+        <input type="checkbox" name="factors" value="Others"> Others
+      </div>
+      <div class="section">
+        <label>What are the main barriers you see to getting a combined respiratory virus vaccine? (Select all that apply)</label><br>
+        <input type="checkbox" name="barriers" value="Safety"> Safety concerns<br>
+        <input type="checkbox" name="barriers" value="Efficacy"> Efficacy<br>
+        <input type="checkbox" name="barriers" value="Costs"> Costs<br>
+        <input type="checkbox" name="barriers" value="mRNA"> mRNA technologies<br>
+        <input type="checkbox" name="barriers" value="PersonalBeliefs"> Personal beliefs<br>
+        <input type="checkbox" name="barriers" value="Others"> Others
+      </div>
+
+      <button type="submit" class="btn">Submit Survey</button>
+    </form>
+    <p><strong>Thank you for completing the survey! Your input is greatly appreciated.</strong></p>
   </div>
-  
-  <script>
-    // Listen for click on the Disagree button
-    document.addEventListener('DOMContentLoaded', () => {
-      const disagreeBtn = document.getElementById('disagree-btn');
-      disagreeBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default anchor behavior
-        window.location.href = '/goodbye'; // Redirect to goodbye page
-      });
-    });
-  </script>
 </body>
 </html>
