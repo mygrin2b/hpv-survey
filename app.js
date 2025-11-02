@@ -44,7 +44,7 @@ async function uploadToGitHub(logFileName, logFilePath) {
     try {
       const response = await octokit.repos.getContent({
         owner: 'mygrin2b', // Replace with your GitHub username
-        repo: 'hpv-survey', // Replace with your repository name
+        repo: 'flu-covid-survey', // Replace with your repository name
         path: logFileName,
         ref: 'main'
       });
@@ -55,7 +55,7 @@ async function uploadToGitHub(logFileName, logFilePath) {
 
     await octokit.repos.createOrUpdateFileContents({
       owner: 'mygrin2b', // Replace with your GitHub username
-      repo: 'hpv-survey', // Replace with your repository name
+      repo: 'flu-covid-survey', // Replace with your repository name
       path: logFileName,
       message: `Add ${logFileName}`,
       content: Buffer.from(fileContent).toString('base64'),
@@ -177,16 +177,20 @@ app.get('/download/:date', auth, async (req, res) => {
 // Handle survey submission
 app.post('/survey', async (req, res) => {
   try {
-    // Required fields from survey.ejs
+    // Required fields from survey.ejs (Combined Respiratory Vaccine Survey)
     const requiredFields = [
-      'age', 'gender', 'studies', 'status', 'familyCancer', 'friendsVaccine', 'residential',
-      'hpvVirus', 'hpvNoSymptoms', 'hpvCancer', 'hpvAge', 'hpvPrevention',
-      'hpvBlood', 'hpvRespiratory', 'hpvSexual', 'hpvWomenOnly', 'hpvCure', 'hpvVaccineExists', 'hpvTest',
-      'hpvLongTerm', 'hpvGovPromotion', 'hpvAdvertising', 'hpvTreatInfection', 'hpvCompulsory',
-      'reasonWorkplace', 'reasonIncentives', 'reasonMedical', 'reasonFamilyFriends', 'reasonProtect',
-      'reasonLowRisk', 'reasonAge', 'reasonSideEffects', 'reasonNotCompulsory', 'reasonCost', 'reasonNoKnowledge', 'reasonFamilyOpposition', 'reasonSafety',
-      'fluVaccine', 'covidVaccine', 'hepatitisVaccine',
-      'hpvSideEffects', 'hpvLessProtective', 'hpvExpensive', 'hpvLessDangerous', 'hpvLackInfo'
+      // Section 1: Demographics
+      'age', 'sex', 'program',
+      // Section 2: Vaccination History
+      'fluVaccine12m', 'covidVaccine12m', 'sideEffects', 'heardTraditional', 'heardMRNA',
+      // Section 3: Knowledge Assessment
+      'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7',
+      // Section 4: Attitudes Toward a Combined Vaccine
+      'attitude1', 'attitude2', 'attitude3', 'attitude4', 'attitude5', 'attitude6',
+      'attitude7', 'attitude8', 'attitude9', 'attitude10', 'attitude11', 'attitude12',
+      // Section 5: Intention to Vaccinate
+      'intentionCombined', 'intentionMRNA'
+      // Note: 'factors' and 'barriers' are checkboxes and may be empty if nothing is selected
     ];
 
     // Check for missing required fields
