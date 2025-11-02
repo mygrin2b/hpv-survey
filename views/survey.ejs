@@ -3,315 +3,243 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HPV Vaccine Survey - Form</title>
+  <title>Combined Respiratory Vaccine Survey - Form</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <div class="container">
-    <h1>HPV Vaccine Survey</h1>
-    <p>This survey has received ethical approval and is anonymous. Your responses will help us understand HPV vaccine uptake among Hong Kong students.</p>
+    <h1>Acceptability of a Combined Respiratory Influenza-COVID-19 Vaccine</h1>
+    <p>Thank you for participating in this research study. As a nursing student, your insights are valuable for understanding attitudes toward emerging vaccines that could protect both healthcare workers and patients from multiple respiratory viruses. This survey is anonymous, takes about 10-15 minutes, and your responses will help inform public health strategies. Participation is voluntary, and you may withdraw at any time. No personally identifying information will be collected. By proceeding, you consent to participate. If you have questions, contact the Principal Investigator Prof. Eddy Lam at 3970 2992.</p>
+    <p>This study has been approved by the Research Ethics Committee (REC) of The Hong Kong Metropolitan University. REC Reference No.: HE-SF2025/64. If you have questions about your rights as a participant in this research study, please contact the Research Ethics Committee of HKMU at 27686251.</p>
     <form action="/survey" method="POST">
-      <!-- Section 1: Socio-Demographic Information -->
-      <h2>Section 1: Socio-Demographic Information</h2>
+      <!-- Section 1: Demographics -->
+      <h2>Section 1: Demographics</h2>
       <div class="section">
-        <label>A. Age:</label><br>
-        <input type="radio" name="age" value="18" required> 18
-        <input type="radio" name="age" value="19"> 19
-        <input type="radio" name="age" value="20"> 20
-        <input type="radio" name="age" value="21"> 21
+        <label>What is your age?</label><br>
+        <input type="text" name="age" placeholder="e.g., 18-20, 21-23" required>
       </div>
       <div class="section">
-        <label>B. Gender:</label><br>
-        <input type="radio" name="gender" value="Female" required> Female
-        <input type="radio" name="gender" value="Male"> Male
+        <label>What is your sex?</label><br>
+        <input type="radio" name="sex" value="Male" required> Male
+        <input type="radio" name="sex" value="Female"> Female
       </div>
       <div class="section">
-        <label>C. Studies:</label><br>
-        <input type="radio" name="studies" value="HealthCare" required> Related to health care or biomedical science
-        <input type="radio" name="studies" value="Other"> Other
-      </div>
-      <div class="section">
-        <label>D. Status:</label><br>
-        <input type="radio" name="status" value="Single" required> Single
-        <input type="radio" name="status" value="InRelationship"> In a relationship
-        <input type="radio" name="status" value="Married"> Married
-      </div>
-      <div class="section">
-        <label>E. Family history of cancer:</label><br>
-        <input type="radio" name="familyCancer" value="Yes" required> Yes
-        <input type="radio" name="familyCancer" value="No"> No
-      </div>
-      <div class="section">
-        <label>F. Family or best friends who took HPV vaccine:</label><br>
-        <input type="radio" name="friendsVaccine" value="Yes" required> Yes
-        <input type="radio" name="friendsVaccine" value="No"> No
-      </div>
-      <div class="section">
-        <label>G. Residential:</label><br>
-        <input type="radio" name="residential" value="HongKong" required> Hong Kong
-        <input type="radio" name="residential" value="Kowloon"> Kowloon
-        <input type="radio" name="residential" value="NewTerritories"> New Territories
+        <label>Which nursing education program are you currently enrolled in?</label><br>
+        <input type="radio" name="program" value="HighDiploma" required> High Diploma in Nursing<br>
+        <input type="radio" name="program" value="Bachelor"> Bachelor of Nursing<br>
+        <input type="radio" name="program" value="Postgraduate"> Postgraduate programmes (Nursing)<br>
+        <input type="radio" name="program" value="Doctorate"> Doctorate (DCS, PhD)
       </div>
 
-      <!-- Section 2: Knowledge about HPV -->
-      <h2>Section 2: Knowledge about HPV</h2>
+      <!-- Section 2: Vaccination History -->
+      <h2>Section 2: Vaccination History</h2>
       <div class="section">
-        <label>A. Please indicate your level of agreement:</label><br>
-        <p>a. HPV is caused by a virus</p>
-        <input type="radio" name="hpvVirus" value="1" required> Strongly disagree
-        <input type="radio" name="hpvVirus" value="2"> Disagree
-        <input type="radio" name="hpvVirus" value="3"> Neutral
-        <input type="radio" name="hpvVirus" value="4"> Agree
-        <input type="radio" name="hpvVirus" value="5"> Strongly agree
-
-        <p>b. Most HPV-infected individuals show no symptoms and are unaware of their infection</p>
-        <input type="radio" name="hpvNoSymptoms" value="1" required> Strongly disagree
-        <input type="radio" name="hpvNoSymptoms" value="2"> Disagree
-        <input type="radio" name="hpvNoSymptoms" value="3"> Neutral
-        <input type="radio" name="hpvNoSymptoms" value="4"> Agree
-        <input type="radio" name="hpvNoSymptoms" value="5"> Strongly agree
-
-        <p>c. HPV can lead to certain types of cancer such as cervical cancer</p>
-        <input type="radio" name="hpvCancer" value="1" required> Strongly disagree
-        <input type="radio" name="hpvCancer" value="2"> Disagree
-        <input type="radio" name="hpvCancer" value="3"> Neutral
-        <input type="radio" name="hpvCancer" value="4"> Agree
-        <input type="radio" name="hpvCancer" value="5"> Strongly agree
-
-        <p>d. The recommended age for HPV vaccination is 11 / 12 years</p>
-        <input type="radio" name="hpvAge" value="1" required> Strongly disagree
-        <input type="radio" name="hpvAge" value="2"> Disagree
-        <input type="radio" name="hpvAge" value="3"> Neutral
-        <input type="radio" name="hpvAge" value="4"> Agree
-        <input type="radio" name="hpvAge" value="5"> Strongly agree
-
-        <p>e. The use of condoms and dental dams can help prevent HPV transmission</p>
-        <input type="radio" name="hpvPrevention" value="1" required> Strongly disagree
-        <input type="radio" name="hpvPrevention" value="2"> Disagree
-        <input type="radio" name="hpvPrevention" value="3"> Neutral
-        <input type="radio" name="hpvPrevention" value="4"> Agree
-        <input type="radio" name="hpvPrevention" value="5"> Strongly agree
+        <label>Have you received the seasonal influenza vaccine in the past 12 months?</label><br>
+        <input type="radio" name="fluVaccine12m" value="Yes" required> Yes
+        <input type="radio" name="fluVaccine12m" value="No"> No
       </div>
       <div class="section">
-        <label>B. Please indicate if you agree or disagree:</label><br>
-        <p>a. HPV is mainly transmitted by blood</p>
-        <input type="radio" name="hpvBlood" value="Yes" required> Yes
-        <input type="radio" name="hpvBlood" value="No"> No
-
-        <p>b. HPV is mainly transmitted via cough and aerosol droplets (respiratory system)</p>
-        <input type="radio" name="hpvRespiratory" value="Yes" required> Yes
-        <input type="radio" name="hpvRespiratory" value="No"> No
-
-        <p>c. HPV is mainly transmitted sexually through skin-to-skin contact and not through semen or body fluids</p>
-        <input type="radio" name="hpvSexual" value="Yes" required> Yes
-        <input type="radio" name="hpvSexual" value="No"> No
-
-        <p>d. Only women are at risk of HPV infection</p>
-        <input type="radio" name="hpvWomenOnly" value="Yes" required> Yes
-        <input type="radio" name="hpvWomenOnly" value="No"> No
-
-        <p>e. There is an existing treatment or cure for HPV</p>
-        <input type="radio" name="hpvCure" value="Yes" required> Yes
-        <input type="radio" name="hpvCure" value="No"> No
-
-        <p>f. An effective vaccine exists for HPV</p>
-        <input type="radio" name="hpvVaccineExists" value="Yes" required> Yes
-        <input type="radio" name="hpvVaccineExists" value="No"> No
-
-        <p>g. There is a test available to detect HPV infection</p>
-        <input type="radio" name="hpvTest" value="Yes" required> Yes
-        <input type="radio" name="hpvTest" value="No"> No
-      </div>
-
-      <!-- Section 3: Attitude towards HPV Vaccination -->
-      <h2>Section 3: Attitude towards HPV Vaccination</h2>
-      <div class="section">
-        <label>A. In your opinion, HPV vaccination:</label><br>
-        <p>Provides long-term protection against HPV infection (over 10 years)</p>
-        <input type="radio" name="hpvLongTerm" value="1" required> Strongly disagree
-        <input type="radio" name="hpvLongTerm" value="2"> Disagree
-        <input type="radio" name="hpvLongTerm" value="3"> Neutral
-        <input type="radio" name="hpvLongTerm" value="4"> Agree
-        <input type="radio" name="hpvLongTerm" value="5"> Strongly agree
-
-        <p>Is effectively promoted by the Hong Kong government</p>
-        <input type="radio" name="hpvGovPromotion" value="1" required> Strongly disagree
-        <input type="radio" name="hpvGovPromotion" value="2"> Disagree
-        <input type="radio" name="hpvGovPromotion" value="3"> Neutral
-        <input type="radio" name="hpvGovPromotion" value="4"> Agree
-        <input type="radio" name="hpvGovPromotion" value="5"> Strongly agree
-
-        <p>Has a strong and efficient advertising campaign</p>
-        <input type="radio" name="hpvAdvertising" value="1" required> Strongly disagree
-        <input type="radio" name="hpvAdvertising" value="2"> Disagree
-        <input type="radio" name="hpvAdvertising" value="3"> Neutral
-        <input type="radio" name="hpvAdvertising" value="4"> Agree
-        <input type="radio" name="hpvAdvertising" value="5"> Strongly agree
-
-        <p>Can treat an HPV infection</p>
-        <input type="radio" name="hpvTreatInfection" value="1" required> Strongly disagree
-        <input type="radio" name="hpvTreatInfection" value="2"> Disagree
-        <input type="radio" name="hpvTreatInfection" value="3"> Neutral
-        <input type="radio" name="hpvTreatInfection" value="4"> Agree
-        <input type="radio" name="hpvTreatInfection" value="5"> Strongly agree
-
-        <p>Should be compulsory like COVID</p>
-        <input type="radio" name="hpvCompulsory" value="1" required> Strongly disagree
-        <input type="radio" name="hpvCompulsory" value="2"> Disagree
-        <input type="radio" name="hpvCompulsory" value="3"> Neutral
-        <input type="radio" name="hpvCompulsory" value="4"> Agree
-        <input type="radio" name="hpvCompulsory" value="5"> Strongly agree
+        <label>Have you received any Covid-19 vaccine dose (primary series or booster) in the past 12 months?</label><br>
+        <input type="radio" name="covidVaccine12m" value="Yes" required> Yes
+        <input type="radio" name="covidVaccine12m" value="No"> No
       </div>
       <div class="section">
-        <label>B. Reasons for deciding to take the HPV vaccine:</label><br>
-        <p>To comply with workplace/university requirements</p>
-        <input type="radio" name="reasonWorkplace" value="1" required> Strongly disagree
-        <input type="radio" name="reasonWorkplace" value="2"> Disagree
-        <input type="radio" name="reasonWorkplace" value="3"> Neutral
-        <input type="radio" name="reasonWorkplace" value="4"> Agree
-        <input type="radio" name="reasonWorkplace" value="5"> Strongly agree
-
-        <p>To benefit from incentives promoting vaccination</p>
-        <input type="radio" name="reasonIncentives" value="1" required> Strongly disagree
-        <input type="radio" name="reasonIncentives" value="2"> Disagree
-        <input type="radio" name="reasonIncentives" value="3"> Neutral
-        <input type="radio" name="reasonIncentives" value="4"> Agree
-        <input type="radio" name="reasonIncentives" value="5"> Strongly agree
-
-        <p>To follow recommendations from medical staff</p>
-        <input type="radio" name="reasonMedical" value="1" required> Strongly disagree
-        <input type="radio" name="reasonMedical" value="2"> Disagree
-        <input type="radio" name="reasonMedical" value="3"> Neutral
-        <input type="radio" name="reasonMedical" value="4"> Agree
-        <input type="radio" name="reasonMedical" value="5"> Strongly agree
-
-        <p>To follow recommendations from family or friends</p>
-        <input type="radio" name="reasonFamilyFriends" value="1" required> Strongly disagree
-        <input type="radio" name="reasonFamilyFriends" value="2"> Disagree
-        <input type="radio" name="reasonFamilyFriends" value="3"> Neutral
-        <input type="radio" name="reasonFamilyFriends" value="4"> Agree
-        <input type="radio" name="reasonFamilyFriends" value="5"> Strongly agree
-
-        <p>To protect myself against HPV and complications like cancer</p>
-        <input type="radio" name="reasonProtect" value="1" required> Strongly disagree
-        <input type="radio" name="reasonProtect" value="2"> Disagree
-        <input type="radio" name="reasonProtect" value="3"> Neutral
-        <input type="radio" name="reasonProtect" value="4"> Agree
-        <input type="radio" name="reasonProtect" value="5"> Strongly agree
+        <label>Have you ever experienced side effects from any respiratory virus vaccine (e.g., flu, Covid-19)?</label><br>
+        <input type="radio" name="sideEffects" value="VerySerious" required> Yes, very serious side effects (difficulty breathing, serious allergic reaction, high fever)<br>
+        <input type="radio" name="sideEffects" value="Moderate"> Yes, moderate side effects (persistent cough, moderate fever, swelling)<br>
+        <input type="radio" name="sideEffects" value="VeryMild"> Yes, very mild side effects (soreness or redness, mild fatigue, slight headache)<br>
+        <input type="radio" name="sideEffects" value="No"> No
       </div>
       <div class="section">
-        <label>C. Reasons for not receiving the HPV vaccine before:</label><br>
-        <p>Vaccination is not deemed necessary due to low perceived risk of infection</p>
-        <input type="radio" name="reasonLowRisk" value="1" required> Strongly disagree
-        <input type="radio" name="reasonLowRisk" value="2"> Disagree
-        <input type="radio" name="reasonLowRisk" value="3"> Neutral
-        <input type="radio" name="reasonLowRisk" value="4"> Agree
-        <input type="radio" name="reasonLowRisk" value="5"> Strongly agree
-
-        <p>The age factor is critical and young people do not need vaccination</p>
-        <input type="radio" name="reasonAge" value="1" required> Strongly disagree
-        <input type="radio" name="reasonAge" value="2"> Disagree
-        <input type="radio" name="reasonAge" value="3"> Neutral
-        <input type="radio" name="reasonAge" value="4"> Agree
-        <input type="radio" name="reasonAge" value="5"> Strongly agree
-
-        <p>Concerns about side effects or discomfort from injections</p>
-        <input type="radio" name="reasonSideEffects" value="1" required> Strongly disagree
-        <input type="radio" name="reasonSideEffects" value="2"> Disagree
-        <input type="radio" name="reasonSideEffects" value="3"> Neutral
-        <input type="radio" name="reasonSideEffects" value="4"> Agree
-        <input type="radio" name="reasonSideEffects" value="5"> Strongly agree
-
-        <p>Vaccination is not compulsory by the government, school, or workplace</p>
-        <input type="radio" name="reasonNotCompulsory" value="1" required> Strongly disagree
-        <input type="radio" name="reasonNotCompulsory" value="2"> Disagree
-        <input type="radio" name="reasonNotCompulsory" value="3"> Neutral
-        <input type="radio" name="reasonNotCompulsory" value="4"> Agree
-        <input type="radio" name="reasonNotCompulsory" value="5"> Strongly agree
-
-        <p>The vaccine is too expensive</p>
-        <input type="radio" name="reasonCost" value="1" required> Strongly disagree
-        <input type="radio" name="reasonCost" value="2"> Disagree
-        <input type="radio" name="reasonCost" value="3"> Neutral
-        <input type="radio" name="reasonCost" value="4"> Agree
-        <input type="radio" name="reasonCost" value="5"> Strongly agree
-
-        <p>Lack of knowledge about HPV and the vaccination program</p>
-        <input type="radio" name="reasonNoKnowledge" value="1" required> Strongly disagree
-        <input type="radio" name="reasonNoKnowledge" value="2"> Disagree
-        <input type="radio" name="reasonNoKnowledge" value="3"> Neutral
-        <input type="radio" name="reasonNoKnowledge" value="4"> Agree
-        <input type="radio" name="reasonNoKnowledge" value="5"> Strongly agree
-
-        <p>Family opposition to vaccination</p>
-        <input type="radio" name="reasonFamilyOpposition" value="1" required> Strongly disagree
-        <input type="radio" name="reasonFamilyOpposition" value="2"> Disagree
-        <input type="radio" name="reasonFamilyOpposition" value="3"> Neutral
-        <input type="radio" name="reasonFamilyOpposition" value="4"> Agree
-        <input type="radio" name="reasonFamilyOpposition" value="5"> Strongly agree
-
-        <p>Concerns regarding vaccine safety</p>
-        <input type="radio" name="reasonSafety" value="1" required> Strongly disagree
-        <input type="radio" name="reasonSafety" value="2"> Disagree
-        <input type="radio" name="reasonSafety" value="3"> Neutral
-        <input type="radio" name="reasonSafety" value="4"> Agree
-        <input type="radio" name="reasonSafety" value="5"> Strongly agree
-      </div>
-
-      <!-- Section 4: Comparison to Other Vaccines -->
-      <h2>Section 4: Comparison to Other Vaccines</h2>
-      <div class="section">
-        <label>A. Have you received the following vaccines?</label><br>
-        <p>Flu vaccine:</p>
-        <input type="radio" name="fluVaccine" value="Yes" required> Yes
-        <input type="radio" name="fluVaccine" value="No"> No
-        <p>COVID vaccine:</p>
-        <input type="radio" name="covidVaccine" value="Yes" required> Yes
-        <input type="radio" name="covidVaccine" value="No"> No
-        <p>Hepatitis vaccine:</p>
-        <input type="radio" name="hepatitisVaccine" value="Yes" required> Yes
-        <input type="radio" name="hepatitisVaccine" value="No"> No
+        <label>Have you heard about live attenuated or inactivated (traditional) vaccines?</label><br>
+        <input type="radio" name="heardTraditional" value="Yes" required> Yes
+        <input type="radio" name="heardTraditional" value="No"> No
       </div>
       <div class="section">
-        <label>B. In your opinion:</label><br>
-        <p>a. The HPV vaccine may lead to more side effects than other vaccines</p>
-        <input type="radio" name="hpvSideEffects" value="1" required> Strongly disagree
-        <input type="radio" name="hpvSideEffects" value="2"> Disagree
-        <input type="radio" name="hpvSideEffects" value="3"> Neutral
-        <input type="radio" name="hpvSideEffects" value="4"> Agree
-        <input type="radio" name="hpvSideEffects" value="5"> Strongly agree
+        <label>Have you heard about mRNA vaccines?</label><br>
+        <input type="radio" name="heardMRNA" value="Yes" required> Yes
+        <input type="radio" name="heardMRNA" value="No"> No
+      </div>
 
-        <p>b. The HPV vaccine is less protective than other vaccines</p>
-        <input type="radio" name="hpvLessProtective" value="1" required> Strongly disagree
-        <input type="radio" name="hpvLessProtective" value="2"> Disagree
-        <input type="radio" name="hpvLessProtective" value="3"> Neutral
-        <input type="radio" name="hpvLessProtective" value="4"> Agree
-        <input type="radio" name="hpvLessProtective" value="5"> Strongly agree
+      <!-- Section 3: Knowledge Assessment -->
+      <h2>Section 3: Knowledge Assessment</h2>
+      <p>Please answer the following 7 questions to the best of your knowledge. They include true/false and multiple-choice formats. There are no right or wrong answers—this is simply to help us gauge your baseline knowledge.</p>
+      <div class="section">
+        <label>1. Approximately what percentage of the global population is infected with influenza annually?</label><br>
+        <input type="radio" name="q1" value="a" required> a) Less than 5%<br>
+        <input type="radio" name="q1" value="b"> b) 5-10%<br>
+        <input type="radio" name="q1" value="c"> c) 20-30%<br>
+        <input type="radio" name="q1" value="d"> d) More than 50%
+      </div>
+      <div class="section">
+        <label>2. True or False: Influenza is primarily transmitted through airborne droplets from coughing or sneezing.</label><br>
+        <input type="radio" name="q2" value="True" required> a) True
+        <input type="radio" name="q2" value="False"> b) False
+      </div>
+      <div class="section">
+        <label>3. How often should influenza vaccines be administered?</label><br>
+        <input type="radio" name="q3" value="a" required> a) Every year<br>
+        <input type="radio" name="q3" value="b"> b) Every five years<br>
+        <input type="radio" name="q3" value="c"> c) Once in a lifetime<br>
+        <input type="radio" name="q3" value="d"> d) I don't know
+      </div>
+      <div class="section">
+        <label>4. True or False: Covid-19 vaccines have been shown to reduce severe outcomes (hospitalization/death) by over 80% in most studies.</label><br>
+        <input type="radio" name="q4" value="True" required> a) True
+        <input type="radio" name="q4" value="False"> b) False
+      </div>
+      <div class="section">
+        <label>5. Which of the following is a common mode of Covid-19 transmission?</label><br>
+        <input type="radio" name="q5" value="a" required> a) Only through contaminated surfaces<br>
+        <input type="radio" name="q5" value="b"> b) Airborne via respiratory droplets and aerosols<br>
+        <input type="radio" name="q5" value="c"> c) Exclusively through food/water<br>
+        <input type="radio" name="q5" value="d"> d) Insect bites
+      </div>
+      <div class="section">
+        <label>6. Which of the following vaccines uses mRNA technologies?</label><br>
+        <input type="radio" name="q6" value="a" required> a) Influenza vaccine<br>
+        <input type="radio" name="q6" value="b"> b) Covid-19 vaccine Comirnaty (Pfizer/ BioNTech)<br>
+        <input type="radio" name="q6" value="c"> c) Covid-19 vaccine Sinovac<br>
+        <input type="radio" name="q6" value="d"> d) Infant BCG vaccine<br>
+        <input type="radio" name="q6" value="e"> e) Measles, Mumps, Rubella & Varicella Infant (MMRV) vaccine
+      </div>
+      <div class="section">
+        <label>7. What is the purpose of influenza or Covid-19 vaccines?</label><br>
+        <input type="radio" name="q7" value="a" required> a) To treat diseases<br>
+        <input type="radio" name="q7" value="b"> b) To prevent infection<br>
+        <input type="radio" name="q7" value="c"> c) To lower the severity of complications even if infected<br>
+        <input type="radio" name="q7" value="d"> d) Both options b and c
+      </div>
 
-        <p>c. The HPV vaccine is more expensive than other vaccines</p>
-        <input type="radio" name="hpvExpensive" value="1" required> Strongly disagree
-        <input type="radio" name="hpvExpensive" value="2"> Disagree
-        <input type="radio" name="hpvExpensive" value="3"> Neutral
-        <input type="radio" name="hpvExpensive" value="4"> Agree
-        <input type="radio" name="hpvExpensive" value="5"> Strongly agree
+      <!-- Section 4: Attitudes Toward a Combined Vaccine -->
+      <h2>Section 4: Attitudes Toward a Combined Vaccine (Health Belief Model)</h2>
+      <p>The following 12 questions ask about your perceptions of a hypothetical new combined vaccine that protects against influenza and Covid-19 in a single shot.</p>
+      <p>For each statement, please rate your agreement on a scale of 1-5.</p>
+      <p><strong>1 = Strongly Disagree | 2 = Disagree | 3 = Neutral | 4 = Agree | 5 = Strongly Agree</strong></p>
+      <div class="section">
+        <p>1. I am particularly concerned about severe complications from influenza or Covid-19 viruses (e.g., hospitalization, long-term side effects).</p>
+        <input type="radio" name="attitude1" value="1" required> Strongly disagree
+        <input type="radio" name="attitude1" value="2"> Disagree
+        <input type="radio" name="attitude1" value="3"> Neutral
+        <input type="radio" name="attitude1" value="4"> Agree
+        <input type="radio" name="attitude1" value="5"> Strongly agree
 
-        <p>d. HPV disease is less common and less dangerous than other diseases</p>
-        <input type="radio" name="hpvLessDangerous" value="1" required> Strongly disagree
-        <input type="radio" name="hpvLessDangerous" value="2"> Disagree
-        <input type="radio" name="hpvLessDangerous" value="3"> Neutral
-        <input type="radio" name="hpvLessDangerous" value="4"> Agree
-        <input type="radio" name="hpvLessDangerous" value="5"> Strongly agree
+        <p>2. A combined vaccine would effectively reduce my risk of getting sick from influenza and Covid-19 viruses.</p>
+        <input type="radio" name="attitude2" value="1" required> Strongly disagree
+        <input type="radio" name="attitude2" value="2"> Disagree
+        <input type="radio" name="attitude2" value="3"> Neutral
+        <input type="radio" name="attitude2" value="4"> Agree
+        <input type="radio" name="attitude2" value="5"> Strongly agree
 
-        <p>e. There is a lack of information and knowledge about HPV</p>
-        <input type="radio" name="hpvLackInfo" value="1" required> Strongly disagree
-        <input type="radio" name="hpvLackInfo" value="2"> Disagree
-        <input type="radio" name="hpvLackInfo" value="3"> Neutral
-        <input type="radio" name="hpvLackInfo" value="4"> Agree
-        <input type="radio" name="hpvLackInfo" value="5"> Strongly agree
+        <p>3. Getting a combined vaccine would make it easier for me to stay protected without multiple shots, benefiting my busy schedule as a student.</p>
+        <input type="radio" name="attitude3" value="1" required> Strongly disagree
+        <input type="radio" name="attitude3" value="2"> Disagree
+        <input type="radio" name="attitude3" value="3"> Neutral
+        <input type="radio" name="attitude3" value="4"> Agree
+        <input type="radio" name="attitude3" value="5"> Strongly agree
+
+        <p>4. I worry about the potential side effects and safety of a new combined vaccine.</p>
+        <input type="radio" name="attitude4" value="1" required> Strongly disagree
+        <input type="radio" name="attitude4" value="2"> Disagree
+        <input type="radio" name="attitude4" value="3"> Neutral
+        <input type="radio" name="attitude4" value="4"> Agree
+        <input type="radio" name="attitude4" value="5"> Strongly agree
+
+        <p>5. I worry that a combined vaccine will have reduced efficacy and offer less protection.</p>
+        <input type="radio" name="attitude5" value="1" required> Strongly disagree
+        <input type="radio" name="attitude5" value="2"> Disagree
+        <input type="radio" name="attitude5" value="3"> Neutral
+        <input type="radio" name="attitude5" value="4"> Agree
+        <input type="radio" name="attitude5" value="5"> Strongly agree
+
+        <p>6. The cost or access to this vaccine might prevent me from getting it.</p>
+        <input type="radio" name="attitude6" value="1" required> Strongly disagree
+        <input type="radio" name="attitude6" value="2"> Disagree
+        <input type="radio" name="attitude6" value="3"> Neutral
+        <input type="radio" name="attitude6" value="4"> Agree
+        <input type="radio" name="attitude6" value="5"> Strongly agree
+
+        <p>7. A recommendation from my nursing instructor or healthcare provider would strongly encourage me to receive the combined vaccine.</p>
+        <input type="radio" name="attitude7" value="1" required> Strongly disagree
+        <input type="radio" name="attitude7" value="2"> Disagree
+        <input type="radio" name="attitude7" value="3"> Neutral
+        <input type="radio" name="attitude7" value="4"> Agree
+        <input type="radio" name="attitude7" value="5"> Strongly agree
+
+        <p>8. Public health campaigns or University Campus offering free combined vaccines would prompt me to act.</p>
+        <input type="radio" name="attitude8" value="1" required> Strongly disagree
+        <input type="radio" name="attitude8" value="2"> Disagree
+        <input type="radio" name="attitude8" value="3"> Neutral
+        <input type="radio" name="attitude8" value="4"> Agree
+        <input type="radio" name="attitude8" value="5"> Strongly agree
+
+        <p>9. I am more willing to receive an mRNA-based influenza vaccine than a traditional one (an inactivated or live attenuated vaccine).</p>
+        <input type="radio" name="attitude9" value="1" required> Strongly disagree
+        <input type="radio" name="attitude9" value="2"> Disagree
+        <input type="radio" name="attitude9" value="3"> Neutral
+        <input type="radio" name="attitude9" value="4"> Agree
+        <input type="radio" name="attitude9" value="5"> Strongly agree
+
+        <p>10. I have a basic understanding of how mRNA vaccines work when compared to traditional vaccines (live attenuated and inactivated vaccines).</p>
+        <input type="radio" name="attitude10" value="1" required> Strongly disagree
+        <input type="radio" name="attitude10" value="2"> Disagree
+        <input type="radio" name="attitude10" value="3"> Neutral
+        <input type="radio" name="attitude10" value="4"> Agree
+        <input type="radio" name="attitude10" value="5"> Strongly agree
+
+        <p>11. I believe that the vaccines produced using mRNA technology are safe.</p>
+        <input type="radio" name="attitude11" value="1" required> Strongly disagree
+        <input type="radio" name="attitude11" value="2"> Disagree
+        <input type="radio" name="attitude11" value="3"> Neutral
+        <input type="radio" name="attitude11" value="4"> Agree
+        <input type="radio" name="attitude11" value="5"> Strongly agree
+
+        <p>12. I believe that the vaccines produced using mRNA technology are more effective than the traditional vaccines (live attenuated or inactivated vaccines).</p>
+        <input type="radio" name="attitude12" value="1" required> Strongly disagree
+        <input type="radio" name="attitude12" value="2"> Disagree
+        <input type="radio" name="attitude12" value="3"> Neutral
+        <input type="radio" name="attitude12" value="4"> Agree
+        <input type="radio" name="attitude12" value="5"> Strongly agree
+      </div>
+
+      <!-- Section 5: Intention to Vaccinate -->
+      <h2>Section 5: Intention to Vaccinate</h2>
+      <div class="section">
+        <label>If a combined annual respiratory vaccine against both influenza and Covid-19 were available, how likely would you be to receive it?</label><br>
+        <input type="radio" name="intentionCombined" value="VeryUnlikely" required> Very unlikely
+        <input type="radio" name="intentionCombined" value="Unlikely"> Unlikely
+        <input type="radio" name="intentionCombined" value="Likely"> Likely
+        <input type="radio" name="intentionCombined" value="VeryLikely"> Very likely
+      </div>
+      <div class="section">
+        <label>How likely would you be to receive this combined vaccine if it utilized mRNA technology (like the Covid-19 Pfizer/ BioNTech vaccine)?</label><br>
+        <input type="radio" name="intentionMRNA" value="VeryUnlikely" required> Very unlikely
+        <input type="radio" name="intentionMRNA" value="Unlikely"> Unlikely
+        <input type="radio" name="intentionMRNA" value="Likely"> Likely
+        <input type="radio" name="intentionMRNA" value="VeryLikely"> Very likely
+      </div>
+      <div class="section">
+        <label>What factors would influence your decision to receive the combined vaccine? (Select all that apply)</label><br>
+        <input type="checkbox" name="factors" value="HealthcareProfessionals"> Recommendations from healthcare professionals<br>
+        <input type="checkbox" name="factors" value="Peers"> Information from peers<br>
+        <input type="checkbox" name="factors" value="PersonalBeliefs"> Personal health beliefs<br>
+        <input type="checkbox" name="factors" value="mRNATechnology"> It is a vaccine using the new mRNA technology<br>
+        <input type="checkbox" name="factors" value="SingleShot"> Do not have to take multiple vaccine shots because one vaccine can protect against multiple diseases<br>
+        <input type="checkbox" name="factors" value="Others"> Others
+      </div>
+      <div class="section">
+        <label>What are the main barriers you see to getting a combined respiratory virus vaccine? (Select all that apply)</label><br>
+        <input type="checkbox" name="barriers" value="Safety"> Safety concerns<br>
+        <input type="checkbox" name="barriers" value="Efficacy"> Efficacy<br>
+        <input type="checkbox" name="barriers" value="Costs"> Costs<br>
+        <input type="checkbox" name="barriers" value="mRNA"> mRNA technologies<br>
+        <input type="checkbox" name="barriers" value="PersonalBeliefs"> Personal beliefs<br>
+        <input type="checkbox" name="barriers" value="Others"> Others
       </div>
 
       <button type="submit" class="btn">Submit Survey</button>
     </form>
+    <p><strong>Thank you for completing the survey! Your input is greatly appreciated.</strong></p>
   </div>
 </body>
 </html>
